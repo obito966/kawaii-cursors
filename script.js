@@ -6,7 +6,7 @@
 'use strict';
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
-const API_BASE = 'http://localhost:3000';
+const API_BASE = 'srv-d7qqkp67r5hc738tjk1g';
 const ADMIN_PASSWORD = 'kawaii123';
 
 // ─── DEFAULT CURSOR DATA ──────────────────────────────────────────────────────
