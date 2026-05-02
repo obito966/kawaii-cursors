@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kawaii Cursors — Premium Cursor Collection</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loader" class="loader">
+    <div class="loader-inner">
+      <div class="loader-logo">✦ Kawaii Cursors</div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+      <p class="loader-text">Loading cursor magic...</p>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div id="notification" class="notification" aria-live="polite"></div>
+
+  <!-- Floating Particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#" class="logo">
+        <span class="logo-icon">✦</span>
+        <span>Kawaii<span class="logo-accent">Cursors</span></span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#upload" class="nav-link">Upload</a>
+        <a href="#extension" class="nav-link">Extension</a>
+        <a href="#admin" class="nav-link admin-link">Admin</a>
+      </div>
+
+      <div class="nav-actions">
+        <button id="resetBtn" class="btn btn-ghost" title="Reset Cursor">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+          Reset
+        </button>
+        <button id="themeToggle" class="theme-toggle" title="Toggle Theme" aria-label="Toggle dark/light mode">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <button class="btn btn-primary" onclick="document.getElementById('upload').scrollIntoView({behavior:'smooth'})">
+          + Upload Cursor
+        </button>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#gallery" class="mobile-link">Gallery</a>
+      <a href="#upload" class="mobile-link">Upload</a>
+      <a href="#extension" class="mobile-link">Extension</a>
+      <a href="#admin" class="mobile-link">Admin</a>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="container hero-content">
+      <div class="hero-badge">✦ Premium Cursor Collection</div>
+      <h1 class="hero-title">
+        Make Your Cursor<br />
+        <span class="gradient-text">Impossibly Cute</span>
+      </h1>
+      <p class="hero-sub">
+        Discover hundreds of hand-crafted kawaii cursors — animated, anime, futuristic, and AI-generated.<br />
+        One click to preview. One click to download.
+      </p>
+      <div class="hero-cta">
+        <a href="#gallery" class="btn btn-primary btn-lg">Browse Gallery</a>
+        <a href="#upload" class="btn btn-outline btn-lg">Upload Your Own</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span id="statTotal">0</span><small>Cursors</small></div>
+        <div class="stat"><span>6</span><small>Categories</small></div>
+        <div class="stat"><span>∞</span><small>Kawaii</small></div>
+      </div>
+    </div>
+    <div class="hero-cursor-demo">
+      <div class="demo-cursor" id="demoCursor"></div>
+    </div>
+  </section>
+
+  <!-- ===== GALLERY ===== -->
+  <section class="gallery" id="gallery">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Cursor <span class="gradient-text">Gallery</span></h2>
+        <p class="section-sub">Browse, preview, and download your perfect cursor</p>
+      </div>
+
+      <!-- Filter Bar -->
+      <div class="filter-bar" id="filterBar">
+        <button class="filter-btn active" data-cat="all">✦ All</button>
+        <button class="filter-btn" data-cat="animated">🎬 Animated</button>
+        <button class="filter-btn" data-cat="anime">🌸 Anime</button>
+        <button class="filter-btn" data-cat="games">🎮 Games</button>
+        <button class="filter-btn" data-cat="funny">😂 Funny</button>
+        <button class="filter-btn" data-cat="futuristic">🚀 Futuristic</button>
+        <button class="filter-btn" data-cat="ai">🤖 AI Cursors</button>
+      </div>
+
+      <!-- Search -->
+      <div class="search-bar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="searchInput" placeholder="Search cursors..." />
+      </div>
+
+      <!-- Grid -->
+      <div class="cursor-grid" id="cursorGrid">
+        <!-- Populated by JS -->
+      </div>
+
+      <div class="empty-state" id="emptyState" hidden>
+        <div class="empty-icon">🔍</div>
+        <h3>No cursors found</h3>
+        <p>Try a different category or upload your own!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== UPLOAD ===== -->
+  <section class="upload-section" id="upload">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Upload <span class="gradient-text">Your Cursor</span></h2>
+        <p class="section-sub">Share your creations with the world</p>
+      </div>
+
+      <div class="upload-card">
+        <div class="upload-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Cursor Name *</label>
+              <input type="text" id="cursorName" placeholder="e.g. Neon Cat Paw" />
+            </div>
+            <div class="form-group">
+              <label>Category *</label>
+              <select id="cursorCategory">
+                <option value="">Select category</option>
+                <option value="animated">Animated</option>
+                <option value="anime">Anime</option>
+                <option value="games">Games</option>
+                <option value="funny">Funny</option>
+                <option value="futuristic">Futuristic</option>
+                <option value="ai">AI Cursors</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="drop-zone" id="dropZone">
+            <input type="file" id="fileInput" accept=".png,.cur,.ani" hidden />
+            <div class="drop-icon">📂</div>
+            <h3>Drop your cursor file here</h3>
+            <p>PNG, CUR, ANI — Max 2MB</p>
+            <button class="btn btn-outline" onclick="document.getElementById('fileInput').click()">Choose File</button>
+            <div id="filePreview" class="file-preview" hidden></div>
+          </div>
+
+          <button class="btn btn-primary btn-full" id="uploadBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload Cursor
+          </button>
+        </div>
+
+        <div class="upload-tips">
+          <h3>📋 Upload Guidelines</h3>
+          <ul>
+            <li>✓ PNG files for static cursors</li>
+            <li>✓ Recommended size: 32×32 or 64×64 px</li>
+            <li>✓ Transparent background preferred</li>
+            <li>✓ Max file size: 2MB</li>
+            <li>✓ CUR/ANI for animated cursors</li>
+          </ul>
+          <div class="upload-tip-note">
+            🌟 After upload, your cursor appears instantly in the gallery!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CHROME EXTENSION ===== -->
+  <section class="extension-section" id="extension">
+    <div class="container">
+      <div class="extension-card">
+        <div class="extension-text">
+          <div class="ext-badge">🧩 Chrome Extension</div>
+          <h2>Use Any Cursor <span class="gradient-text">Everywhere</span></h2>
+          <p>Install our Chrome extension to apply your favorite Kawaii cursors across all websites — not just this page.</p>
+          <ul class="ext-features">
+            <li>✦ Works on all websites</li>
+            <li>✦ One-click activation</li>
+            <li>✦ Instant cursor switching</li>
+            <li>✦ Free forever</li>
+          </ul>
+          <div class="ext-actions">
+            <a href="#" class="btn btn-primary" id="downloadExtension">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Extension
+            </a>
+            <a href="#" class="btn btn-outline">View Source</a>
+          </div>
+        </div>
+        <div class="extension-visual">
+          <div class="browser-mockup">
+            <div class="browser-bar">
+              <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+              <div class="browser-url">kawaiicursors.io</div>
+            </div>
+            <div class="browser-content">
+              <div class="mini-cursor-grid">
+                <div class="mini-card active-mini">🌸</div>
+                <div class="mini-card">🎮</div>
+                <div class="mini-card">⚡</div>
+                <div class="mini-card">🤖</div>
+              </div>
+              <div class="mini-preview">Extension Active ✓</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ADMIN PANEL ===== -->
+  <section class="admin-section" id="admin">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Admin <span class="gradient-text">Panel</span></h2>
+        <p class="section-sub">Manage all uploaded cursors</p>
+      </div>
+
+      <!-- Admin Login -->
+      <div class="admin-login" id="adminLogin">
+        <div class="admin-login-card">
+          <div class="admin-lock">🔐</div>
+          <h3>Admin Access Required</h3>
+          <p>Enter the admin password to manage cursors</p>
+          <div class="admin-input-wrap">
+            <input type="password" id="adminPassword" placeholder="Enter admin password" />
+            <button class="btn btn-primary" id="adminLoginBtn">Login</button>
+          </div>
+          <small>Demo password: <code>kawaii123</code></small>
+        </div>
+      </div>
+
+      <!-- Admin Dashboard (hidden until login) -->
+      <div class="admin-dashboard" id="adminDashboard" hidden>
+        <div class="admin-stats-row">
+          <div class="admin-stat-card">
+            <span class="admin-stat-icon">🖱️</span>
+            <div><strong id="adminTotal">0</strong><small>Total Cursors</small></div>
+          </div>
+          <div class="admin-stat-card">
+            <span class="admin-stat-icon">📂</span>
+            <div><strong id="adminCategories">6</strong><small>Categories</small></div>
+          </div>
+          <div class="admin-stat-card">
+            <span class="admin-stat-icon">⬆️</span>
+            <div><strong id="adminUploads">0</strong><small>User Uploads</small></div>
+          </div>
+        </div>
+
+        <div class="admin-toolbar">
+          <h3>Manage Cursors</h3>
+          <div class="admin-filters">
+            <select id="adminFilter">
+              <option value="all">All Categories</option>
+              <option value="animated">Animated</option>
+              <option value="anime">Anime</option>
+              <option value="games">Games</option>
+              <option value="funny">Funny</option>
+              <option value="futuristic">Futuristic</option>
+              <option value="ai">AI Cursors</option>
+            </select>
+            <button class="btn btn-ghost" id="refreshAdmin">↺ Refresh</button>
+            <button class="btn btn-danger" id="deleteAllBtn">🗑 Delete All</button>
+          </div>
+        </div>
+
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Preview</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminTableBody"></tbody>
+          </table>
+        </div>
+
+        <button class="btn btn-ghost btn-sm" id="adminLogout">Logout</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">✦ Kawaii<span class="logo-accent">Cursors</span></a>
+        <p>The internet's cutest cursor collection.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Gallery</h4>
+          <a href="#">Animated</a>
+          <a href="#">Anime</a>
+          <a href="#">Games</a>
+          <a href="#">Futuristic</a>
+        </div>
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <a href="#">Upload</a>
+          <a href="#">Extension</a>
+          <a href="#">Admin</a>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <a href="#">Privacy</a>
+          <a href="#">Terms</a>
+          <a href="#">License</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 KawaiiCursors. Made with 💖</p>
+    </div>
+  </footer>
+
+  <!-- Cursor Preview Modal -->
+  <div class="modal-overlay" id="previewModal" hidden>
+    <div class="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-preview-area" id="modalPreviewArea">
+        <img id="modalCursorImg" src="" alt="" />
+        <p>Move your mouse around this area</p>
+      </div>
+      <div class="modal-info">
+        <h3 id="modalName"></h3>
+        <span class="cat-badge" id="modalCat"></span>
+        <div class="modal-actions">
+          <button class="btn btn-primary" id="modalApply">✦ Apply Cursor</button>
+          <button class="btn btn-outline" id="modalDownload">⬇ Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
